@@ -21,3 +21,7 @@ Go code must be formatted with `gofmt`. Use idiomatic mixedCaps names and short,
 ## Testing Guidelines
 
 Use the standard library `testing` package. Test files should be named `*_test.go`, with test functions such as `TestServerStarts`.
+
+## Persistence Guidelines
+
+Use GORM v2 with the PostgreSQL driver backed by pgx. Keep GORM persistence models inside infrastructure/store packages and do not expose them as transport DTOs. Repository methods must accept `context.Context`; refresh-token rotation must run in a database transaction. Do not use GORM `AutoMigrate` as a replacement for versioned production SQL migrations.
