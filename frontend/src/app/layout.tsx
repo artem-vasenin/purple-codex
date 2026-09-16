@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Uptime Monitor",
-  description: "Uptime monitoring service frontend",
+  description: "A clear view of service health.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -14,7 +14,7 @@ type Config struct {
 }
 
 func Load() (Config, error) {
-	c := Config{Addr: env("APP_ADDR", ":8080"), DatabaseURL: env("DATABASE_URL", "host=localhost user=postgres password=postgres dbname=app port=5432 sslmode=disable"), JWTSecret: os.Getenv("JWT_SECRET"), AccessTTL: duration("ACCESS_TTL", 15*time.Minute), RefreshTTL: duration("REFRESH_TTL", 30*24*time.Hour), CookieSecure: boolValue("COOKIE_SECURE", false)}
+	c := Config{Addr: env("APP_ADDR", ":8080"), DatabaseURL: env("DATABASE_URL", "host=localhost user=postgres password=postgres dbname=app port=5433 sslmode=disable"), JWTSecret: os.Getenv("JWT_SECRET"), AccessTTL: duration("ACCESS_TTL", 15*time.Minute), RefreshTTL: duration("REFRESH_TTL", 30*24*time.Hour), CookieSecure: boolValue("COOKIE_SECURE", false)}
 	if c.JWTSecret == "" {
 		return Config{}, fmt.Errorf("JWT_SECRET is required")
 	}

@@ -17,6 +17,8 @@ npm run lint         # Run ESLint
 
 Use the committed `package-lock.json`; update it through npm when dependencies change.
 
+Authentication uses Next.js Route Handlers as a same-origin BFF. Access and refresh tokens must remain in `HttpOnly` cookies and must never be exposed to client components, `localStorage`, or `sessionStorage`. The Go API URL is configured through `NEXT_PUBLIC_API_URL`.
+
 ## Coding Style & Naming Conventions
 
 TypeScript and TSX use two-space indentation and semicolons as enforced by the existing ESLint setup. Use `PascalCase` for React components, `camelCase` for variables and functions, and kebab-case for route segments. Prefer explicit types at public boundaries.
