@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 
 export const accessCookie = "access_token";
 export const refreshCookie = "refresh_token";
+export const profileCookie = "profile_email";
 
 export function backendUrl() {
   return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
@@ -27,6 +28,10 @@ export function cookieOptions(maxAge: number) {
     path: "/",
     maxAge,
   };
+}
+
+export function profileCookieOptions(maxAge: number) {
+  return { ...cookieOptions(maxAge), httpOnly: true };
 }
 
 export async function forwardBackendError(response: Response) {

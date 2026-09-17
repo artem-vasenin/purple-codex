@@ -45,3 +45,9 @@ Yes implement this plan
 
 - /default mode
 Примени миграции
+
+```bash
+migrate -path backend/migrations \
+-database "postgres://postgres:postgres@localhost:5433/app?sslmode=disable" \
+up
+```

@@ -33,6 +33,35 @@ if ! command -v npm >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! command -v docker >/dev/null 2>&1; then
+  echo "docker is required to start postgres" >&2
+  exit 1
+fi
+
+if ! docker compose version >/dev/null 2>&1; then
+  echo "docker compose is required to start postgres" >&2
+  exit 1
+fi
+
+COMPOSE_FILE="$ROOT_DIR/docker-compose.yml"
+echo "Starting postgres..."
+docker compose -f "$COMPOSE_FILE" up -d postgres
+
+echo "Waiting for postgres to become ready..."
+postgres_ready=false
+for _ in {1..30}; do
+  if docker compose -f "$COMPOSE_FILE" exec -T postgres pg_isready -U postgres -d app >/dev/null 2>&1; then
+    postgres_ready=true
+    break
+  fi
+  sleep 1
+done
+
+if [[ "$postgres_ready" != true ]]; then
+  echo "postgres did not become ready in time" >&2
+  exit 1
+fi
+
 echo "Starting backend on ${BACKEND_ADDR}..."
 (
   cd "$BACKEND_DIR"

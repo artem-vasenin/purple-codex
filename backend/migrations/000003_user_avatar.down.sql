@@ -1,0 +1,2 @@
+ALTER TABLE users DROP COLUMN IF EXISTS avatar_type;
+ALTER TABLE users DROP COLUMN IF EXISTS avatar_data;
